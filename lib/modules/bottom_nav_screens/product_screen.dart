@@ -56,9 +56,47 @@ class ProductScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
               )
           ),
-          const SizedBox(
-            height: 10.0,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Text(
+                  "Categories",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w800
+                  ),
+                ),
+                Container(
+                  height: 100,
+                  child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => buildCategories(),
+                      separatorBuilder:  (context, index) => const SizedBox(
+                        width: 10,
+                      ),
+                      itemCount: 10
+                  ),
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+                Text(
+                  "New Products",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800
+                  ),
+                ),
+              ],
+            ),
           ),
+
           Container(
             color: Colors.grey[300],
             child: GridView.count(
@@ -169,5 +207,33 @@ class ProductScreen extends StatelessWidget {
         )
       ],
     ),
+  );
+
+  Widget buildCategories() =>  Stack(
+    alignment: Alignment.bottomCenter,
+    children: [
+      Image(
+          height: 100,
+          width: 100,
+          fit: BoxFit.cover,
+          image: NetworkImage('https://student.valuxapps.com/storage/uploads/categories/1630142480dvQxx.3658058.jpg')
+
+      ),
+      Container(
+        alignment: Alignment.center,
+        color: Colors.black.withOpacity(0.8),
+        width: 100,
+        height: 26,
+        // height: 100,
+        child: Text(
+          "Mask",
+          style: TextStyle(
+              fontSize: 22,
+              color: Colors.white
+          ),
+        ),
+      )
+
+    ],
   );
 }
