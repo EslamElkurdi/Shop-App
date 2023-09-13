@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/layout/cubit/cubit.dart';
 import 'package:shop/layout/cubit/states.dart';
 import 'package:shop/models/home/home.dart';
+import 'package:shop/shared/component/components.dart';
 
 import '../../models/categories/categories_model.dart';
 import '../../shared/styles/colors.dart';
@@ -17,7 +18,15 @@ class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopAppCubit, ShopLayoutStates>(
-      listener: (context, state){},
+      listener: (context, state)
+      {
+        if(state is ShopFavoritesSuccessState){
+          if(state.changeFavoritesModel?.status == false){
+            showToast(state.changeFavoritesModel?.message);
+          }
+
+        }
+      },
       builder: (context, state){
         return ConditionalBuilder(
             condition: ShopAppCubit.get(context).homeModel != null && ShopAppCubit.get(context).dataModel != null,
@@ -190,11 +199,11 @@ class ProductScreen extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       onPressed: ()
                       {
-                        // ShopAppCubit.get(context).changeFavorites(model.id);
+                         ShopAppCubit.get(context).changeFavorites(model.id);
                       },
-                      icon: const CircleAvatar(
+                      icon: CircleAvatar(
                         radius: 15.0,
-                        // backgroundColor: ShopAppCubit.get(context).favorites[model.id] == true ? defaultColor : Colors.grey,
+                         backgroundColor: ShopAppCubit.get(context).favorites[model.id] == true ? defaultColor : Colors.grey,
                         child: Icon(
                           Icons.favorite_border,
                           size: 14.0,
