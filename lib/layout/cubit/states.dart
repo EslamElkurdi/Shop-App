@@ -4,9 +4,13 @@ class ShopInitialState extends ShopLayoutStates {}
 
 class ShopChangeBottomNavBarState extends ShopLayoutStates {}
 
-class ShopLoadingHomeData extends ShopLayoutStates {}
+class ShopLoadingHomeDataState extends ShopLayoutStates {}
 
-class ShopHomeDataSuccess extends ShopLayoutStates {}
+class ShopHomeDataSuccessState extends ShopLayoutStates {}
 
-class ShopHomeDataError extends ShopLayoutStates {}
+class ShopHomeDataErrorState extends ShopLayoutStates {}
+
+class ShopCategoriesSuccessState extends ShopLayoutStates {}
+
+class ShopCategoriesErrorState extends ShopLayoutStates {}
 
