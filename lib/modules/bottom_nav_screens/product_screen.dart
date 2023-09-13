@@ -8,6 +8,7 @@ import 'package:shop/layout/cubit/cubit.dart';
 import 'package:shop/layout/cubit/states.dart';
 import 'package:shop/models/home/home.dart';
 
+import '../../models/categories/categories_model.dart';
 import '../../shared/styles/colors.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -19,17 +20,17 @@ class ProductScreen extends StatelessWidget {
       listener: (context, state){},
       builder: (context, state){
         return ConditionalBuilder(
-            condition: ShopAppCubit.get(context).homeModel != null,
-            builder: (context)=> productBuilder(ShopAppCubit.get(context).homeModel,context),
+            condition: ShopAppCubit.get(context).homeModel != null && ShopAppCubit.get(context).dataModel != null,
+            builder: (context)=> productBuilder(ShopAppCubit.get(context).homeModel,ShopAppCubit.get(context).dataModel,context),
             fallback: (context)=> const Center(child: CircularProgressIndicator())
         );
       },
     );
   }
 
-  Widget productBuilder(HomeModel? model,context)
+  Widget productBuilder(HomeModel? model,CategoryDataModel? categoryDataModel,context)
   {
-    if (model == null) {
+    if (model == null  && categoryDataModel == null) {
       // Handle the case when the model is null
       return const Center(child: CircularProgressIndicator());
     }
@@ -40,7 +41,7 @@ class ProductScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CarouselSlider(
-              items: model.data.banners.map((e) => Image(
+              items: model?.data.banners.map((e) => Image(
                   image: NetworkImage(e.image)
               )).toList(),
               options: CarouselOptions(
@@ -76,11 +77,11 @@ class ProductScreen extends StatelessWidget {
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => buildCategories(),
+                      itemBuilder: (context, index) => buildCategories(categoryDataModel.data?.items[index]),
                       separatorBuilder:  (context, index) => const SizedBox(
                         width: 10,
                       ),
-                      itemCount: 10
+                      itemCount: categoryDataModel!.data!.items.length
                   ),
                 ),
                 const SizedBox(
@@ -106,7 +107,7 @@ class ProductScreen extends StatelessWidget {
               mainAxisSpacing: 1.0,
               crossAxisSpacing: 10.0,
               childAspectRatio: 1 / 1.7,
-              children: List.generate(model.data.products.length,
+              children: List.generate(model!.data.products.length,
                       (index) => buildGridProduct(model.data.products[index], context)
               ),
             ),
@@ -209,14 +210,14 @@ class ProductScreen extends StatelessWidget {
     ),
   );
 
-  Widget buildCategories() =>  Stack(
+  Widget buildCategories(CategoryItem? categoryItem) =>  Stack(
     alignment: Alignment.bottomCenter,
     children: [
       Image(
           height: 100,
           width: 100,
           fit: BoxFit.cover,
-          image: NetworkImage('https://student.valuxapps.com/storage/uploads/categories/1630142480dvQxx.3658058.jpg')
+          image: NetworkImage(categoryItem!.image)
 
       ),
       Container(
@@ -226,10 +227,14 @@ class ProductScreen extends StatelessWidget {
         height: 26,
         // height: 100,
         child: Text(
-          "Mask",
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          "${categoryItem.name}",
           style: TextStyle(
-              fontSize: 22,
-              color: Colors.white
+              fontSize: 17,
+              color: Colors.white,
+
           ),
         ),
       )

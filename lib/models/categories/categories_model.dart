@@ -1,16 +1,16 @@
-class DataModel {
+class CategoryDataModel {
   bool status;
   String? message;
   CategoryData? data;
 
-  DataModel({
+  CategoryDataModel({
     required this.status,
     this.message,
     this.data,
   });
 
-  factory DataModel.fromJson(Map<String, dynamic> json) {
-    return DataModel(
+  factory CategoryDataModel.fromJson(Map<String, dynamic> json) {
+    return CategoryDataModel(
       status: json['status'],
       message: json['message'],
       data: CategoryData.fromJson(json['data']),
