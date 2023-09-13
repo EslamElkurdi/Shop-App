@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void navigateAndFinish(context, widget) => Navigator.pushAndRemoveUntil(
     context, MaterialPageRoute(builder: (context) => widget), (route) => false);
@@ -41,6 +42,12 @@ Widget defaultFormField({
       ),
     );
 
+void navigateTo(context, widget) => Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => widget,
+    ));
+
 Widget defaultButton({
   double width = double.infinity,
   Color background = Colors.blue,
@@ -73,3 +80,15 @@ child: Text(
 '${text.toUpperCase()}'
 )
 );
+
+void showToast(String? message) {
+  Fluttertoast.showToast(
+    msg: message ?? "",
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    backgroundColor: Colors.black54,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}
+
