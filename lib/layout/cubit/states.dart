@@ -21,8 +21,7 @@ class ShopFavoritesSuccessState extends ShopLayoutStates {
   ShopFavoritesSuccessState({required this.changeFavoritesModel});
 }
 
-class ShopChangeFavoritesSuccessState extends ShopLayoutStates
-{
+class ShopChangeFavoritesSuccessState extends ShopLayoutStates {
 
 }
 
@@ -33,5 +32,12 @@ class ShopGetFavoritesSuccessState extends ShopLayoutStates {}
 class ShopGetFavoritesErrorState extends ShopLayoutStates {}
 
 class ShopLoadingGetFavoritesState extends ShopLayoutStates {}
+
+
+class ShopUserDataSuccessState extends ShopLayoutStates {}
+
+class ShopUserDataErrorState extends ShopLayoutStates {}
+
+class ShopLoadingUserDataState extends ShopLayoutStates {}
 
 

@@ -4,6 +4,7 @@ import 'package:shop/layout/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:shop/models/favorites/favorites_changes.dart';
 import 'package:shop/models/home/home.dart';
+import 'package:shop/models/login/login_model.dart';
 import 'package:shop/modules/bottom_nav_screens/categories_screen.dart';
 import 'package:shop/modules/bottom_nav_screens/favorite_screen.dart';
 import 'package:shop/modules/bottom_nav_screens/product_screen.dart';
@@ -28,7 +29,7 @@ class ShopAppCubit extends Cubit<ShopLayoutStates> {
         const ProductScreen(),
         const CategoriesScreen(),
         const FavoriteScreen(),
-        const SettingScreen()
+        SettingScreen()
       ];
 
   void changeBottomNavBar(int index)
@@ -122,8 +123,6 @@ class ShopAppCubit extends Cubit<ShopLayoutStates> {
 
   FavoritesModel? favoritesModel;
 
-
-
   void getFavoritesData()
   {
     emit(ShopLoadingGetFavoritesState());
@@ -141,6 +140,30 @@ class ShopAppCubit extends Cubit<ShopLayoutStates> {
       emit(ShopGetFavoritesSuccessState());
     }).catchError((error){
       emit(ShopGetFavoritesErrorState());
+    });
+  }
+
+  LoginModel? userData;
+
+  void getUserData()
+  {
+    emit(ShopLoadingUserDataState());
+
+    DioHelper.getData(
+        url: PROFILE,
+        token: token
+    ).then((value){
+      // userData = LoginModel.fromjson(value.data);
+
+
+      userData = LoginModel.fromjson(value.data);
+
+      print(userData?.data?.name);
+
+      emit(ShopUserDataSuccessState());
+    }).catchError((error){
+      print(error.toString());
+      emit(ShopUserDataErrorState());
     });
   }
 }

@@ -5,6 +5,7 @@ import 'package:shop/modules/login/Cubit/cubit.dart';
 import 'package:shop/modules/login/Cubit/states.dart';
 import 'package:shop/modules/register/register.dart';
 import 'package:shop/shared/component/components.dart';
+import 'package:shop/shared/constants/constatnts.dart';
 import 'package:shop/shared/network/remote/cach_helper.dart';
 
 import '../../layout/shop_layout.dart';
@@ -34,14 +35,14 @@ class LoginScreen extends StatelessWidget {
                     key: 'token',
                     value: state.model?.data?.token
                 ).then((value){
+                  token = state.model!.data!.token!;
+
                   navigateAndFinish(context,  ShopLayout());
                 });
 
 
               }else{
-                // print(state.model?.message);
-                // showToastMessage(state.model.message);
-                //print(state.model.data!.token);
+
                 showToast(state.model?.message);
               }
 
