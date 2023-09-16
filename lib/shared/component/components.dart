@@ -105,7 +105,7 @@ void showToast(String? message) {
   );
 }
 
-Widget buildListItem(model, context) => Padding(
+Widget buildListItem(model, context, {isOldPrice = true}) => Padding(
   padding: const EdgeInsets.all(20.0),
   child: Container(
     height: 120.0,
@@ -121,7 +121,7 @@ Widget buildListItem(model, context) => Padding(
                 height: 120.0,
                 fit: BoxFit.cover,
               ),
-              if(model?.discount != 0)
+              if(model?.discount != 0 && isOldPrice)
                 Container(
                   color: Colors.red,
                   padding: EdgeInsets.all( 3.0),

@@ -27,6 +27,8 @@ class SettingScreen extends StatelessWidget {
         nameController.text = model.data!.name!;
         phoneController.text = model.data!.phone!;
 
+
+
         return Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(

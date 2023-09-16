@@ -8,7 +8,7 @@ import 'package:shop/models/login/login_model.dart';
 import 'package:shop/modules/bottom_nav_screens/categories_screen.dart';
 import 'package:shop/modules/bottom_nav_screens/favorite_screen.dart';
 import 'package:shop/modules/bottom_nav_screens/product_screen.dart';
-import 'package:shop/modules/bottom_nav_screens/search_screen.dart';
+import 'package:shop/modules/search/search_screen.dart';
 import 'package:shop/modules/bottom_nav_screens/setting_screen.dart';
 import 'package:shop/shared/constants/constatnts.dart';
 import 'package:shop/shared/network/end_points.dart';

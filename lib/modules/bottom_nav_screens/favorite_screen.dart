@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/layout/cubit/cubit.dart';
 import 'package:shop/layout/cubit/states.dart';
+import 'package:shop/layout/shop_layout.dart';
 
 import '../../shared/component/components.dart';
 
@@ -13,6 +14,8 @@ class FavoriteScreen extends StatelessWidget {
     return  BlocConsumer<ShopAppCubit, ShopLayoutStates>(
       listener: (context, state){},
       builder: (context, state){
+
+        // ShopAppCubit.get(context).getFavoritesData();
 
         return ConditionalBuilder(
             condition: state is! ShopLoadingGetFavoritesState,

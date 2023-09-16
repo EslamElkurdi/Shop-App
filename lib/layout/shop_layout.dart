@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop/layout/cubit/cubit.dart';
-import 'package:shop/modules/bottom_nav_screens/search_screen.dart';
+import 'package:shop/modules/search/search_screen.dart';
 import 'package:shop/modules/login/login.dart';
 import 'package:shop/shared/component/components.dart';
 import 'package:shop/shared/network/remote/cach_helper.dart';
